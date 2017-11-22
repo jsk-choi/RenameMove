@@ -16,12 +16,13 @@ namespace RenameMove
             IConfiguration configuration = new Configuration();
 
             foreach (var path in configuration.PathsToProcess)
-            {
                 ProcessAllLocations(path, configuration);
-            }
+
+            foreach (var path in configuration.PathsToProcessNoRename)
+                ProcessAllLocations(path, configuration, false);
         }
 
-        static void ProcessAllLocations(string path, IConfiguration configuration) {
+        static void ProcessAllLocations(string path, IConfiguration configuration, bool renameFile = true) {
 
             IMyFileSystem fileSystem = new MyFileSystem();
             fileSystem._ignoreFlagSuffix = "zz";
@@ -38,6 +39,8 @@ namespace RenameMove
 
             foreach (var dir in dirs)
             {
+                if (renameMove.IgnoreSubfolder(dir)) continue;
+
                 // RETRIEVE ALL FILES IN SUBDIRECTORY
                 files = fileSystem.GetFilesInDirectory(dir.DirectoryInfo);
 
@@ -48,7 +51,7 @@ namespace RenameMove
                 files = fileSystem.GetFilesInDirectory(dir.DirectoryInfo);
 
                 // RENAME VIDEO FILE TO DIRECTORY NAME AND MOVE TO PARENT
-                renameMove.RenameVideoFile(files);
+                renameMove.RenameVideoFile(files, renameFile);
 
                 // DELETE SUBDIRECTORY
                 renameMove.DeleteSubDirectory(dir.DirectoryInfo);

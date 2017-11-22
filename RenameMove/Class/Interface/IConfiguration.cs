@@ -9,6 +9,7 @@ namespace RenameMove
     public interface IConfiguration
     {
         IEnumerable<string> PathsToProcess { get; set; }
+        IEnumerable<string> PathsToProcessNoRename { get; set; }
         IEnumerable<string> VideoFileTypeExtensions { get; set; }
     }
 }

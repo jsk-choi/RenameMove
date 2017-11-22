@@ -12,10 +12,10 @@ namespace RenameMove
         DirectoryInfo _parentDirectory { get; set; }
 
         void MoveVideoFileToParentDirectory();
-        void RenameVideoFile(IEnumerable<FileInfo> allFiles);
+        void RenameVideoFile(IEnumerable<FileInfo> allFiles, bool renameFile);
         void DeleteSubDirectory(DirectoryInfo subdirectory);
         void DeleteUnwantedFiles(IEnumerable<FileInfo> allFiles);
-        bool IgnoreSubfolder();
+        bool IgnoreSubfolder(MyDirectoryInfo dir);
 
     }
 }

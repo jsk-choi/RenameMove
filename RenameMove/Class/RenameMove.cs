@@ -45,7 +45,7 @@ namespace RenameMove
 
         }
 
-        public void RenameVideoFile(IEnumerable<FileInfo> allFiles) {
+        public void RenameVideoFile(IEnumerable<FileInfo> allFiles, bool renameFile) {
 
             foreach (var file in allFiles)
             {
@@ -53,23 +53,52 @@ namespace RenameMove
                 string uniqueId = "";
 
                 var dirInfo = new DirectoryInfo(file.FullName);
-                var destinationFileName = $"{dirInfo.Parent.FullName}{file.Extension}";
 
+                string destinationFileName = renameFile ? 
+                    $"{dirInfo.Parent.FullName}{file.Extension}" : 
+                    $"{dirInfo.Parent.Parent.FullName}{Path.DirectorySeparatorChar}{file.Name}";
+                
                 while (File.Exists(destinationFileName)) {
 
-                    uniqueId = $"-{counter}";
-                    destinationFileName = $"{dirInfo.Parent.FullName}{uniqueId}{file.Extension}";
+                    uniqueId = $"-{counter}-";
+
+                    //destinationFileName = $"{dirInfo.Parent.FullName}{uniqueId}{file.Extension}";
+
+                    destinationFileName = renameFile ?
+                        $"{dirInfo.Parent.FullName}{uniqueId}{file.Extension}" :
+                        $"{dirInfo.Parent.Parent.FullName}{Path.DirectorySeparatorChar}{uniqueId}{file.Name}";
 
                     counter++;
                 }
 
-                File.Move(file.FullName, destinationFileName);
+                try
+                {
+                    File.Move(file.FullName, destinationFileName);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
 
         }
 
-        public bool IgnoreSubfolder() {
-            return true;
+        public bool IgnoreSubfolder(MyDirectoryInfo dir) {
+
+            bool ignore = false;
+
+            try
+            {
+                Directory.Move(dir.DirectoryInfo.FullName, $"{dir.DirectoryInfo.FullName}-aa");
+            }
+            catch (Exception)
+            {
+                ignore = true;
+            }
+
+            Directory.Move($"{dir.DirectoryInfo.FullName}-aa", dir.DirectoryInfo.FullName);
+
+            return ignore;
         }
 
         public void Dispose() { }
