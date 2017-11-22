@@ -1,0 +1,7 @@
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\bin\Release\RenameMove.exe.config
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\bin\Release\RenameMove.exe
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\bin\Release\RenameMove.pdb
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\bin\Release\System.IO.Abstractions.dll
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\obj\Release\RenameMove.csproj.CoreCompileInputs.cache
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\obj\Release\RenameMove.exe
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\obj\Release\RenameMove.pdb

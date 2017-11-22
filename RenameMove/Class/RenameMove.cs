@@ -9,16 +9,14 @@ namespace RenameMove
 {
     public class RenameMove : IRenameMove, IDisposable
     {
-        public string _ignoreFlagSuffix { get; set; }
         public DirectoryInfo _parentDirectory { get; set; }
 
         private IConfiguration _configuration { get; set; }
         private IMyFileSystem _fileSystem { get; set; }
 
-        public RenameMove(IConfiguration configuration, IMyFileSystem fileSystem, string parentDirectory) {
+        public RenameMove(IConfiguration configuration, IMyFileSystem fileSystem) {
             _configuration = configuration;
             _fileSystem = fileSystem;
-            _parentDirectory = new DirectoryInfo(parentDirectory);
         }
 
         public void MoveVideoFileToParentDirectory() {
@@ -27,7 +25,9 @@ namespace RenameMove
                 //.Where(x => _configuration.VideoFileTypeExtensions.Contains(x.Extension));
         }
 
-        public void DeleteSubDirectory() {
+        public void DeleteSubDirectory(DirectoryInfo subdirectory)
+        {
+            Directory.Delete(subdirectory.FullName, true);
         }
 
         public void DeleteUnwantedFiles(IEnumerable<FileInfo> allFiles) {
@@ -42,6 +42,29 @@ namespace RenameMove
 
             foreach (var unwantedFile in unwantedFiles)
                 File.Delete(unwantedFile.FullName);
+
+        }
+
+        public void RenameVideoFile(IEnumerable<FileInfo> allFiles) {
+
+            foreach (var file in allFiles)
+            {
+                int counter = 0;
+                string uniqueId = "";
+
+                var dirInfo = new DirectoryInfo(file.FullName);
+                var destinationFileName = $"{dirInfo.Parent.FullName}{file.Extension}";
+
+                while (File.Exists(destinationFileName)) {
+
+                    uniqueId = $"-{counter}";
+                    destinationFileName = $"{dirInfo.Parent.FullName}{uniqueId}{file.Extension}";
+
+                    counter++;
+                }
+
+                File.Move(file.FullName, destinationFileName);
+            }
 
         }
 

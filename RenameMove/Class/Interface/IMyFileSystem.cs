@@ -9,6 +9,8 @@ namespace RenameMove
 {
     public interface IMyFileSystem
     {
+        string _ignoreFlagSuffix { get; set; }
+
         IEnumerable<FileInfo> GetFilesInDirectory(string directoryPath);
         IEnumerable<FileInfo> GetFilesInDirectory(DirectoryInfo directoryInfo);
         IEnumerable<MyDirectoryInfo> GetSubDirectoriesInDirectory(string directoryPath);

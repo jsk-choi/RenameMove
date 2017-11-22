@@ -11,6 +11,7 @@ namespace RenameMove
     public class MyFileSystem : IMyFileSystem
     {
         readonly IFileSystem _fileSystem;
+        public string _ignoreFlagSuffix { get; set; }
 
         public MyFileSystem(IFileSystem fileSystem) {
             _fileSystem = fileSystem;
@@ -35,9 +36,11 @@ namespace RenameMove
         {
             return GetSubDirectoriesInDirectory(new DirectoryInfo(directoryPath));
         }
-        public IEnumerable<MyDirectoryInfo> GetSubDirectoriesInDirectory(DirectoryInfo directoryInfo) {
+        public IEnumerable<MyDirectoryInfo> GetSubDirectoriesInDirectory(DirectoryInfo directoryInfo)
+        {
             return Directory
                 .GetDirectories(directoryInfo.FullName, "*.*", SearchOption.AllDirectories)
+                .Where(x => !x.ToLower().Contains(_ignoreFlagSuffix))
                 .Select(x => new MyDirectoryInfo(x));
         }
     }

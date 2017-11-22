@@ -13,28 +13,45 @@ namespace RenameMove
     {
         static void Main(string[] args)
         {
-            IMyFileSystem fileSystem = new MyFileSystem();
             IConfiguration configuration = new Configuration();
 
-            string parentDir = configuration.PathsToProcess.First();
+            foreach (var path in configuration.PathsToProcess)
+            {
+                ProcessAllLocations(path, configuration);
+            }
+        }
 
-            IRenameMove renameMove = new RenameMove(configuration, fileSystem, parentDir);
+        static void ProcessAllLocations(string path, IConfiguration configuration) {
 
+            IMyFileSystem fileSystem = new MyFileSystem();
+            fileSystem._ignoreFlagSuffix = "zz";
+
+            IRenameMove renameMove = new RenameMove(configuration, fileSystem);
+
+            // RETRIEVE ALL SUBDIRECTORIES
             var dirs = fileSystem
-                .GetSubDirectoriesInDirectory(parentDir)
+                .GetSubDirectoriesInDirectory(path)
                 .OrderByDescending(x => x.Depth)
                 .ThenBy(x => x.DirectoryInfo.FullName);
 
+            IEnumerable<FileInfo> files;
+
             foreach (var dir in dirs)
             {
-                var files = fileSystem.GetFilesInDirectory(dir.DirectoryInfo);
-                renameMove.DeleteUnwantedFiles(files);
+                // RETRIEVE ALL FILES IN SUBDIRECTORY
                 files = fileSystem.GetFilesInDirectory(dir.DirectoryInfo);
 
-                foreach (var file in files)
-                {
-                    
-                }
+                // DELETE ANYTHING NOT VIDEO FILE
+                renameMove.DeleteUnwantedFiles(files);
+
+                // RETRIEVE ALL VIDEO FILES IN SUBDIRECTORY
+                files = fileSystem.GetFilesInDirectory(dir.DirectoryInfo);
+
+                // RENAME VIDEO FILE TO DIRECTORY NAME AND MOVE TO PARENT
+                renameMove.RenameVideoFile(files);
+
+                // DELETE SUBDIRECTORY
+                renameMove.DeleteSubDirectory(dir.DirectoryInfo);
             }
         }
     }

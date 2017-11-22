@@ -9,11 +9,11 @@ namespace RenameMove
 {
     public interface IRenameMove
     {
-        string _ignoreFlagSuffix { get; set; }
         DirectoryInfo _parentDirectory { get; set; }
 
         void MoveVideoFileToParentDirectory();
-        void DeleteSubDirectory();
+        void RenameVideoFile(IEnumerable<FileInfo> allFiles);
+        void DeleteSubDirectory(DirectoryInfo subdirectory);
         void DeleteUnwantedFiles(IEnumerable<FileInfo> allFiles);
         bool IgnoreSubfolder();
 
