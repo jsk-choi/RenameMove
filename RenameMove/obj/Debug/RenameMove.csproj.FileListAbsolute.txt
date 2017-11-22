@@ -1,0 +1,8 @@
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\bin\Debug\RenameMove.exe.config
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\bin\Debug\RenameMove.exe
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\bin\Debug\RenameMove.pdb
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\bin\Debug\System.IO.Abstractions.dll
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\obj\Debug\RenameMove.csproj.CoreCompileInputs.cache
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\obj\Debug\RenameMove.exe
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\obj\Debug\RenameMove.pdb
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove\obj\Debug\RenameMove.csprojResolveAssemblyReference.cache

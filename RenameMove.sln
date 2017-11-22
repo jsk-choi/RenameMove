@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenameMove", "RenameMove\RenameMove.csproj", "{12B37A62-E4A8-4712-9899-C73D02181B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenameMove.Tests", "RenameMove.Tests\RenameMove.Tests.csproj", "{094A0513-819E-46D0-B332-55D735B39017}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12B37A62-E4A8-4712-9899-C73D02181B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12B37A62-E4A8-4712-9899-C73D02181B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12B37A62-E4A8-4712-9899-C73D02181B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12B37A62-E4A8-4712-9899-C73D02181B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{094A0513-819E-46D0-B332-55D735B39017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{094A0513-819E-46D0-B332-55D735B39017}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{094A0513-819E-46D0-B332-55D735B39017}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{094A0513-819E-46D0-B332-55D735B39017}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2467FAA-0F05-48D3-9C47-04F4F981A756}
+	EndGlobalSection
+EndGlobal
