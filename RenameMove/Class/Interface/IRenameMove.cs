@@ -11,7 +11,7 @@ namespace RenameMove
     {
         DirectoryInfo _parentDirectory { get; set; }
 
-        void MoveVideoFileToParentDirectory();
+        //void MoveVideoFileToParentDirectory();
         void RenameVideoFile(IEnumerable<FileInfo> allFiles, bool renameFile);
         void DeleteSubDirectory(DirectoryInfo subdirectory);
         void DeleteUnwantedFiles(IEnumerable<FileInfo> allFiles);

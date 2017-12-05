@@ -22,3 +22,6 @@ C:\Users\jc\Desktop\wip\RenameMove\RenameMove.Tests\obj\Debug\RenameMove.Tests.c
 C:\Users\jc\Desktop\wip\RenameMove\RenameMove.Tests\obj\Debug\RenameMove.Tests.csproj.CoreCompileInputs.cache
 C:\Users\jc\Desktop\wip\RenameMove\RenameMove.Tests\obj\Debug\RenameMove.Tests.dll
 C:\Users\jc\Desktop\wip\RenameMove\RenameMove.Tests\obj\Debug\RenameMove.Tests.pdb
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove.Tests\bin\Debug\NLog.config
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove.Tests\bin\Debug\NLog.dll
+C:\Users\jc\Desktop\wip\RenameMove\RenameMove.Tests\bin\Debug\NLog.xml

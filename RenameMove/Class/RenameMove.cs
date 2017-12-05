@@ -5,6 +5,8 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
+using NLog;
+
 namespace RenameMove
 {
     public class RenameMove : IRenameMove, IDisposable
@@ -13,21 +15,24 @@ namespace RenameMove
 
         private IConfiguration _configuration { get; set; }
         private IMyFileSystem _fileSystem { get; set; }
+        private ILogger _logger { get; set; }
 
-        public RenameMove(IConfiguration configuration, IMyFileSystem fileSystem) {
+        public RenameMove(IConfiguration configuration, IMyFileSystem fileSystem, ILogger logger) {
             _configuration = configuration;
             _fileSystem = fileSystem;
+            _logger = logger;
         }
 
-        public void MoveVideoFileToParentDirectory() {
-            var videoFiles = _fileSystem
-                .GetFilesInDirectory(_parentDirectory);
-                //.Where(x => _configuration.VideoFileTypeExtensions.Contains(x.Extension));
-        }
+        //public void MoveVideoFileToParentDirectory() {
+        //    var videoFiles = _fileSystem
+        //        .GetFilesInDirectory(_parentDirectory);
+        //        //.Where(x => _configuration.VideoFileTypeExtensions.Contains(x.Extension));
+        //}
 
         public void DeleteSubDirectory(DirectoryInfo subdirectory)
         {
             Directory.Delete(subdirectory.FullName, true);
+            _logger.Info($"delete subdir:{Environment.NewLine}{subdirectory.FullName}{Environment.NewLine}{Environment.NewLine}");
         }
 
         public void DeleteUnwantedFiles(IEnumerable<FileInfo> allFiles) {
@@ -40,8 +45,10 @@ namespace RenameMove
                     x.Name.ToLower().Replace(x.Extension.ToLower(), "").ToLower().EndsWith("sample")
                 );
 
-            foreach (var unwantedFile in unwantedFiles)
+            foreach (var unwantedFile in unwantedFiles) {
                 File.Delete(unwantedFile.FullName);
+                _logger.Info($"delete file:{Environment.NewLine}{unwantedFile.FullName}{Environment.NewLine}{Environment.NewLine}");
+            }
 
         }
 
@@ -74,10 +81,11 @@ namespace RenameMove
                 try
                 {
                     File.Move(file.FullName, destinationFileName);
+                    _logger.Info($"rename file:{Environment.NewLine}{file.FullName} >> {destinationFileName}{Environment.NewLine}{Environment.NewLine}");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    _logger.Error($"rename file failed:{Environment.NewLine}{file.FullName} >> {destinationFileName}{Environment.NewLine}{Environment.NewLine}");
                 }
             }
 
